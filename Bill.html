@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./NavCatFoot.css">
+    <title>Bill</title>
+   <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, sans-serif;
+}
+
+body {
+    background-color: #BED4CB;
+}
+
+/* MAIN WRAPPER */
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* CONTAINER (CARD STYLE) */
+.container {
+    width: 100%;
+    max-width: 750px;
+    background-color: #87B6BC;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* TITLE */
+.container h2 {
+    margin-bottom: 20px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* HEADERS */
+th {
+    background-color: #6fa5ab;
+    padding: 12px;
+    text-align: center;
+}
+
+/* CELLS */
+td {
+     /* text-align: left; */
+    padding: 15px;
+    text-align: center;
+}
+
+/* ROW SPACING */
+tr {
+     background-color: #6fa5ab;
+    border-bottom: 1px solid #ddd;
+}
+
+/* TOTAL ROW */
+tfoot td {
+    
+    font-weight: bold;
+    padding: 15px;
+}
+
+/* REMOVE OLD SPACING */
+#bill-table {
+    border-spacing: 0;
+}
+    </style>
+</head>
+<body>  
+     <nav class="navdiv">
+      <!-- website logo -->
+       
+      <div class="logo"><img src="./img/logo.png" alt="logo" height="100px" width="190px" /></div>
+                <ul type="none">
+                    <!-- list for page redirection -->
+                    <li> <a href="./Home.html">Home</a></li>     
+                    <li> <a href="">Products <i class="fa-solid fa-angle-down"></i></a>
+      <div class="dropdown">
+        <table>
+       
+        <tr>
+          <td><a href="./LivingRoom.html">Living Room</a></td>
+          <td><a href="./Office.html">Office</a></td>
+        </tr>
+        <tr> 
+          <td><a href="./Kitchen.html">Kitchen</a></td>
+           <td><a href="./OutDoor.html">Out Door</a></td>
+        </tr>
+        <tr>
+          <td><a href="./BedRoom.html">Bed Room </a></td>
+          <td><a href="./Library.html">Library</a></td></tr>
+        </tr>
+        <tr><td><a href="./Cabinet.html">Cabinets</a></td></tr>
+       
+
+
+      </table>
+      </div>
+      </li>
+                    <li><a href="./About.html">About Us</a></li>
+                    <li><a href="./Contact.html">Contact</a></li>
+                </ul>
+       <div class="icon" id="user-icon">
+      
+    </div>
+
+        <div class="icon">
+            <a href="./Cart.html"> <i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+    </nav>
+        
+    <div class="main">
+    <div class="container">
+    <h2 style="text-align: center;">Bill Details</h2>
+    <table id="bill-table" border="0" cellpadding="7" cellspacing="20">
+            
+        <tbody id="bill-body">
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="1"><strong>Total Amount:</strong></td>
+                <td id="total-amount" colspan="3"  style="text-align:right;">₹0.00</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+    </div>
+    </div>
+    </div>
+    
+</body>
+<script>
+    $(document).ready(function () {
+
+    const billData = JSON.parse(sessionStorage.getItem("billData"));
+    const userName = sessionStorage.getItem("userName");
+
+    if (!billData) {
+        alert("No bill details found. Complete payment first.");
+        return;
+    }
+
+    const billID = billData.BillID;
+    const items = billData.Items;
+
+    let html = "";
+    let total = 0;
+
+    $.ajax({
+        url: "http://localhost:55801/api/Product",
+        type: "GET",
+        success: function (products) {
+
+            // ✅ HEADER ONCE
+            html += `
+                <tr>
+                    <th colspan="1">Bill ID</th>
+                    <td colspan="3" style="text-align:right; padding-right:70px;">${billID}</td>
+                </tr>
+                <tr>
+                    <th colspan="1">User Name</th>
+                    <td colspan="3" style="text-align:right; padding-right:70px;">${userName}</td>
+                </tr>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Subtotal</th>
+                </tr>
+            `;
+
+            items.forEach(item => {
+
+                const product = products.find(p => p.ProdID === item.ProdID);
+                if (!product) return;
+
+                const qty = item.Qty;
+                const price = item.Price;
+                const subtotal = qty * price;
+
+                total += subtotal;
+
+                html += `
+                    <tr>
+                        <td>${product.ProdName}</td>
+                        <td>₹${price}</td>
+                        <td>${qty}</td>
+                        <td>₹${subtotal}</td>
+                    </tr>
+                `;
+            });
+
+            $("#bill-body").html(html);
+            $("#total-amount").text("₹" + total+".00");
+        }
+    });
+});
+</script>
+<!-- <script>
+$(document).ready(function () {
+
+    const billData = JSON.parse(sessionStorage.getItem("billData"));
+    const userName=JSON.parse(sessionStorage.getItem("userName"));
+    if (!billData) {
+        alert("No bill details found. Complete payment first.");
+        return;
+    }
+
+    const billID = billData.BillID;
+    const items = billData.Items;
+
+    let html = "";
+    let total = 0;
+
+    $.ajax({
+        url: "http://localhost:55801/api/Product",
+        type: "GET",
+        success: function (products) {
+
+            items.forEach(item => {
+
+                const product = products.find(p => p.ProdID === item.ProdID);
+                if (!product) return;
+
+                const subtotal = item.Qty * item.Price;
+                total += subtotal;
+
+                html += `
+                                        <tr>
+                                            <th>Bill ID</th>
+                                            <td>${item.BillID}</td>
+                                            </tr>
+                                            <tr>
+                                            <th>User Name</th>
+                                            <td>${userName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price Per Item</th>
+                                            <th>Quantity</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                        <tr>
+                                            <td>${product.ProdName}</td>
+                                            <td>₹${item.BillAmt}.00</td>
+                                            <td>${item.BillQty}</td>
+                                            <td>₹${subtotal}.00</td>
+                                        </tr>`
+                //     <tr>
+                //         <td>${product.ProdName}</td>
+                //         <td>₹${item.Price}</td>
+                //         <td>${item.Qty}</td>
+                //         <td>₹${subtotal}</td>
+                //     </tr>
+                // `
+                ;
+            });
+
+            $("#bill-body").html(html);
+            $("#total-amount").text("₹" + total);
+        }
+    });
+});
+</script> -->
+<!-- <script>
+   $(document).ready(function(){
+
+    const userID= sessionStorage.getItem("userID");
+
+    if(!userID){
+        alert("Please login to view your bill.");
+        window.location.href = "LoginPage.html";
+        return;
+    }
+
+    // Step 1: get the user
+    // $.ajax({
+    //     url: userApi,
+    //     type: "GET",
+    //     success: function(users){
+    //         const user = users.find(u => u.UserID === userID);
+    //         if(!user){
+    //             alert("User not found!");
+    //             return;
+    //         }
+    //         const userName = user.Name;
+            
+
+            // Step 2: get all Bill for this user
+            $.ajax({
+                url: "http://localhost:55801/api/Bill", // your API endpoint
+                type: "GET",
+                success: function(bills){
+                    // Filter bills belonging to this user
+                    let userBills = bills.filter(b => b.UserID === userID);
+                    if(userBills.length === 0){
+                        $("#bill-body").html("<tr><td colspan='6' style='text-align:center;'>No bill found!</td></tr>");
+                        return;
+                    }
+
+                    // get BIllDetails
+                    $.ajax({
+                        url: "http://localhost:55801/api/BillDetails", 
+                        type:"GET",
+                        success:(details)=>{
+                            details.forEach(item=>{
+                                const prodID=item.ProdID;
+                                 // Step 3: get all products
+                                $.ajax({
+                                url: prodApi,
+                                type: "GET",
+                                success: function(products){
+                                    let html = "";
+                                    let total = 0;
+                            
+                                        const product = products.find(p => p.ProdID === item.ProdID);
+                                        if(!product) return;
+                                    
+                                        const subtotal = item.BillQty * p.Price;
+                                        total += subtotal;
+                                    
+                                        html += `
+                                        <tr>
+                                            <th>Bill ID</th>
+                                            <td>${b.BillID}</td>
+                                            </tr>
+                                            <tr>
+                                            <th>User Name</th>
+                                            <td>${userName}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Price Per Item</th>
+                                            <th>Quantity</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                        <tr>
+                                            <td>${product.ProdName}</td>
+                                            <td>₹${b.BillAmt}.00</td>
+                                            <td>${b.BillQty}</td>
+                                            <td>₹${subtotal}.00</td>
+                                        </tr>`;
+                                        $("#bill-body").html(html);
+                            $("#total-amount").text(`₹${total}.00`);
+                                }
+                            })
+                                    
+                        })
+                            },
+                        error: function(err){
+                            console.log("Failed to fetch products", err);
+                        }
+                            });
+                 },              
+                })
+                
+        // });
+    // })
+            })
+
+</script> -->
+<script src="./JS/Cart.js"></script>
+<script src="./JS/func.js"></script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="./NavCatFoot.css">
+    <style>
+        body {
+        margin: 0%;
+        padding: 0%;
+        background-color: #bed4cb;
+        text-align: center;
+        font-family: "Verdana";
+      }
+      
+.main{
+
+   background-color: #BED4CB;
+    padding: 10px;
+}
+.container{
+     margin:100px 450px;
+    padding: 4%;
+    width: 700px;
+    height: 450px;
+     background-color: #87B6BC;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navdiv">
+      <!-- website logo -->
+       
+            <div class="logo">
+                <img src="./img/logo.png" alt="logo" height="100px" width="190px" />
+            </div>
+                <ul type="none">
+                    <!-- list for page redirection -->
+                    <li> <a href="./Home.html">Home</a></li>     
+                    <li> <a href="">Products <i class="fa-solid fa-angle-down"></i></a>
+                        <div class="dropdown">
+                             <table>
+                                 <tr>
+                                   <td><a href="./LivingRoom.html">Living Room</a></td>
+                                   <td><a href="./Office.html">Office</a></td>
+                                 </tr>
+                                 <tr> 
+                                   <td><a href="./Kitchen.html">Kitchen</a></td>
+                                    <td><a href="./OutDoor.html">Out Door</a></td>
+                                 </tr>
+                                 <tr>
+                                   <td><a href="./BedRoom.html">Bed Room </a></td>
+                                   <td><a href="./Library.html">Library</a></td></tr>
+                                 </tr>
+                                 <tr><td><a href="./Cabinet.html">Cabinets</a></td></tr>
+                             </table>
+                        </div>
+                    </li>
+                    <li> <a href="./AdminHome.html">Admin Panel</a></li>  
+                    
+                </ul>
+                 
+            <div class="icon" id="user-icon"> </div>
+
+        
+    </nav>
+    <div class="main">
+        <div class="container">
+    <h2>Bill Details</h2>
+    <label > Bill ID:</label> 
+    <select name="" id="ddlBillID"></select>
+    <label>User Name:</label>
+    <input type="text" id="txtName">
+    <label>Product Names:</label>
+     </div>
+    </div>
+</body>
+<script src="./JS/func.js"></script>
+</html>

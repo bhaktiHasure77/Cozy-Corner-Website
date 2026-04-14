@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cozy Corner : Sign in</title>
+    <!-- Jquery -->
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      body {
+        margin: 0%;
+        padding: 0%;
+        background-color: #bed4cb;
+        text-align: center;
+        font-family: "Verdana";
+      }
+      .log-container {
+        /* width: auto; */
+        margin: 170px;
+        background-color: #87b6bc;
+        border: 2px solid #70979c;
+        border-radius: 50px;
+        /* position: fixed; */
+        display: flex;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .logo{
+        margin: 200px 0px 100px 100px;
+      }
+    
+      /* .main {
+        background-color: #87b6bc;
+        margin: 70px;
+        padding: 40px;
+        border: 2px solid #70979c;
+        border-radius: 50px;
+        display: inline-block;
+      } */
+      label {
+        font-size: 110%;
+        color: rgb(0, 0, 0);
+      }
+      .input {
+        margin: 10px;
+        padding-top: 1.5%;
+        padding-left: 6%;
+        font-size: 100%;
+        outline: none;
+        border: #82948d solid 2px;
+      }
+
+      div h1 {
+        margin-top: 50px;
+      }
+      .form-box {
+        /* display: inline-flex; */
+        margin: 50px;
+       
+      }
+      button {
+        background-color: #698f94;
+        padding: 10px 20px;
+        border: #050505 solid 2px;
+        border-radius: 10px;
+
+        cursor: pointer;
+      }
+      .login-link {
+        margin-top: 15px;
+        font-size: 14px;
+      }
+
+      .login-link a {
+        color: #000000;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="log-container">
+        <div class="logo">
+            <img src="./img/logo.png" alt="" height="300px" width="400px"/>
+         </div>
+         <div class="form-box">
+               <div style="margin-top:0px" >
+                 <h1
+                   style="
+                     font-family: &quot;Verdana&quot;;
+                     color: black;
+                     font-size: 250%;
+                     padding: 10px;
+                   ">
+                   New User Account
+                 </h1>
+               </div>
+               <div>
+                  <form action="" id="signupForm">
+                    <div style="margin-top: 1.5%">
+                      <label >Email</label><br />
+                      <input class="input" type="email" id="email" required /><br />
+                    </div>
+                    <div style="margin-top: 1.5%">
+                      <label >Name </label><br />
+                      <input class="input"  type="text" id="name" /><br />
+                    </div>
+                
+                    <div style="margin-top: 1.5%">
+                      <label >Password </label><br />
+                      <input
+                        class="input"
+                        type="password"
+                        id="pass"
+                        required
+                      /><br /><br />
+                    </div>
+                    <div style="margin-top: 1.5%">
+                      <label> Confirm Password </label><br />
+                      <input
+                        class="input"
+                        type="password"
+                        id="pass2"
+                        required
+                      /><br /><br />
+                    </div>
+                    <div>
+                      <button class="button-sign" type="button" onclick="SignUp()">Sign up</button>
+                    </div>
+                    <div class="login-link">
+                      Already have an account? <a href="LoginPage.html">Login</a>
+                    </div>
+                  </form>
+                </div>
+          </div>
+    </div>
+  </body>
+  <script src="./JS/SignUp.js"></script>
+</html>

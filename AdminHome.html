@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./NavCatFoot.css">
+    <!-- <link rel="stylesheet" href="./card.css"> -->
+    
+     <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #bed4cb;
+    font-family: Verdana;
+}
+
+/* MAIN CONTAINER - CENTER EVERYTHING */
+.main {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;   /* horizontal center */
+    align-items: center;       /* vertical center */
+    gap: 40px;                 /* space between cards */
+}
+
+/* CARD DESIGN */
+.cards {
+    height: 200px;
+    width: 300px;
+    background-color: #87b6bc;
+    border: 2px solid #70979c;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.3s;
+}
+
+/* LINK STYLE */
+.cards a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+/* .cards a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* ADD THIS */
+  /*  gap: 10px;
+    text-align: center;
+} */
+/* ICON */
+.icon {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TEXT */
+.cards p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* 🔥 HOVER EFFECT */
+.cards:hover {
+    transform: translateY(-10px) scale(1.05);
+    background-color: #6f9ca2;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ICON HOVER */
+.cards:hover .icon {
+    color: white;
+    transform: scale(1.2);
+}
+
+/* TEXT HOVER */
+.cards:hover p {
+    color: white;
+}
+     </style>  
+     
+    </head>
+<body>
+    <nav class="navdiv">
+      <!-- website logo -->
+       
+            <div class="logo">
+                <img src="./img/logo.png" alt="logo" height="100px" width="190px" />
+            </div>
+                <ul type="none">
+                    <!-- list for page redirection -->
+                    <li> <a href="./Home.html">Home</a></li>     
+                    <li> <a href="">Products <i class="fa-solid fa-angle-down"></i></a>
+                        <div class="dropdown">
+                             <table>
+                                 <tr>
+                                   <td><a href="./LivingRoom.html">Living Room</a></td>
+                                   <td><a href="./Office.html">Office</a></td>
+                                 </tr>
+                                 <tr> 
+                                   <td><a href="./Kitchen.html">Kitchen</a></td>
+                                    <td><a href="./OutDoor.html">Out Door</a></td>
+                                 </tr>
+                                 <tr>
+                                   <td><a href="./BedRoom.html">Bed Room </a></td>
+                                   <td><a href="./Library.html">Library</a></td></tr>
+                                 </tr>
+                                 <tr><td><a href="./Cabinet.html">Cabinets</a></td></tr>
+                             </table>
+                        </div>
+                    </li>
+                    <li> <a href="./AdminHome.html">Admin Panel</a></li>  
+                    
+                </ul>
+                 
+            <div class="icon" id="user-icon"> </div>
+
+        
+    </nav>
+    <div class="main">
+        
+     <!-- <div class="cards">
+         <a href="./BillDetails.html">
+                <div class="icon"><i class="fa-solid fa-money-check"></i></div>
+                        <p>Bill Details</p>
+    
+            </a>
+     </div> -->
+
+<div class="cards">
+         <a href="./User.html">
+
+            <div class="icon"><i class="fa-solid fa-user-gear"></i></div>
+                <div>
+                    <p>User Manager</p>
+                </div>
+            </a>
+     </div>
+                  <div class="cards">
+         <a href="./Product.html">
+<div class="icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                <div>
+                    <p>Product Manager</p>
+                </div>
+            </a>
+     </div>  
+                   
+        
+
+    </div>
+</body>
+<script src="./JS/func.js"></script>
+</html>
